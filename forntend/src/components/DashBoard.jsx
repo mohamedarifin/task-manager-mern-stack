@@ -41,7 +41,7 @@ export const DashBoard = () => {
     setdashload(true)
     let LocalStoreEmail = localStorage.getItem('UsErEmAiL010A');
     setlocalEmail(LocalStoreEmail);
-    await axios.get(`http://localhost:5050/todolist/?email=${LocalStoreEmail}`)
+    await axios.get(`https://task-manager-mern-stack-zaxt.onrender.com/todolist/?email=${LocalStoreEmail}`)
     .then(res =>{
       setdashload(false);
       settoDoItems(res.data.todos)
@@ -54,7 +54,7 @@ export const DashBoard = () => {
     const fullTime = new Date;
     const dated = `${fullTime.getDate()}/${fullTime.getDay()}/${fullTime.getFullYear()} - ${fullTime.getHours()}:${fullTime.getMinutes()}:${fullTime.getSeconds()}`
 
-    await axios.post('http://localhost:5050/todolist' , { title , description , localEmail , dated })
+    await axios.post('https://task-manager-mern-stack-zaxt.onrender.com/todolist' , { title , description , localEmail , dated })
     .then(res => {
       setloading(true)
       if(res.data.msg == 'Successfully Added !!'){
@@ -80,7 +80,7 @@ export const DashBoard = () => {
         message: 'LogOut Successfull',
         onClick: ()=> window.location = window.location,
         theme: 'darkblue',
-        duration: 60000,
+        duration: 864000000,
         closeButton: 'Go away',
         native: true,
         icon: 'https://img.icons8.com/bubbles/100/reminders.png',
@@ -94,7 +94,7 @@ export const DashBoard = () => {
   const deleteItemHandler = async (id) => { 
     const confirmed = confirm("Sure to delete this list ?");
     if(confirmed){
-      await axios.delete(`http://localhost:5050/todolist/${id}`)
+      await axios.delete(`https://task-manager-mern-stack-zaxt.onrender.com/todolist/${id}`)
     .then(res => settoDoDeletedRes(res.data.msg))
     }
     
@@ -103,7 +103,7 @@ export const DashBoard = () => {
   const EditsubmitHandler = async (e) => { 
     e.preventDefault();
     setloading(true)
-    await axios.put(`http://localhost:5050/todolist/${editedId}` , { Edittitle , Editdescription })
+    await axios.put(`https://task-manager-mern-stack-zaxt.onrender.com/todolist/${editedId}` , { Edittitle , Editdescription })
     .then(res => {
       setloading(false)
       seteddListShow(false);

@@ -40,7 +40,7 @@ export const SignIn = () => {
         if(name && email && password.length >=8){
           setvalidPass(true)
           setloading(false)
-          await axios.post('http://localhost:5050/signup' , { name , email , password })
+          await axios.post('https://task-manager-mern-stack-zaxt.onrender.com/signup' , { name , email , password })
           .then(res=>{
           setloading(true)
           setSignInRes(res.data.msg);
@@ -52,7 +52,7 @@ export const SignIn = () => {
             message: 'Successfully SignIned',
             onClick: ()=> window.location = window.location,
             theme: 'darkblue',
-            duration: 60000,
+            duration: 864000000,
             closeButton: 'Go away',
             native: true,
             icon: 'https://img.icons8.com/bubbles/100/reminders.png',
