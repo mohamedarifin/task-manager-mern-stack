@@ -1,6 +1,7 @@
 const express = require('express');
 const UserModel = require('./Models/Usermodel');
 const toDoModel = require('./Models/Todomodel');
+const bookModel = require('./Models/BookTicket');
 const Route = express.Router();
 Route.post('/signup',async (req,res)=>{
     try {
@@ -121,6 +122,39 @@ Route.put('/todolist/:id', async (req,res)=>{
         })
     }
     
+})
+
+Route.post('/bookticket', async(req,res)=>{
+    try {
+        const { name , trainName , email , amount , trainNo  } = req.body;
+        
+        const TicketDetail = await bookModel.create({ name , trainName , email , amount , trainNo });
+
+        if(TicketDetail){
+            res.json({
+                msg : 'Successfully Added !!'
+            })
+        }
+    } catch (error) {
+        res.json({
+            msg : error
+        })
+    }
+})
+
+Route.get('/bookticket', async(req,res)=>{
+    try {
+        const { email } = req.query;
+        const ticket = await bookModel.find({ email });
+
+        res.json({
+            ticket
+        })
+    } catch (error) {
+        res.json({
+            err
+        })
+    }
 })
 
 module.exports = Route
