@@ -11,7 +11,10 @@ const bookSchema = new mongoose.Schema({
         type : Number
     },
     trainNo :{
-        type : Number,
+        type : Number
+    },
+    email : {
+        type : String
     }
 })
 
