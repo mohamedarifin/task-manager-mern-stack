@@ -19,7 +19,7 @@ mongoose.connect(process.env.DATABASE_URL).then(() => {
 app.use(Route);
 
 app.get('/', (req, res) => {
-    res.send('welcome to our Server');
+    res.send('welcome to our Serverss');
 })
 
 app.listen(process.env.PORT, () => {
