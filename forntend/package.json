@@ -1,7 +1,7 @@
 {
   "name": "forntend",
   "private": true,
-  "proxy": "http://localhost:5050/",
+  "proxy": "https://task-manager-mern-stack-zaxt.onrender.com/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

@@ -22,7 +22,7 @@ export const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     setloading(false)
-      await axios.post('http://localhost:5050/login' , { email , password })
+      await axios.post('https://task-manager-mern-stack-zaxt.onrender.com/login' , { email , password })
       .then(res =>{
         setloading(true)
         setloginRes(res.data.msg);
