@@ -72,20 +72,43 @@ Route.post('/todolist', async (req, res) => {
     }
 })
 
+// Route.get('/todolist', async (req, res) => {
+//     try {
+//         const { email } = req.query;
+//         const todos = await toDoModel.find({ email });
+
+//         res.json({
+//             todos
+//         })
+//     } catch (error) {
+//         res.json({
+//             err
+//         })
+//     }
+// })
+
 Route.get('/todolist', async (req, res) => {
     try {
+        console.log("TODOLIST REQUEST:", req.query.email);
+
         const { email } = req.query;
+
         const todos = await toDoModel.find({ email });
+
+        console.log("TODOLIST RESULT:", todos);
 
         res.json({
             todos
-        })
+        });
+
     } catch (error) {
-        res.json({
-            err
-        })
+        console.error("TODOLIST ERROR:", error);
+
+        res.status(500).json({
+            error: error.message
+        });
     }
-})
+});
 
 Route.delete('/todolist/:id', async (req, res) => {
     try {
