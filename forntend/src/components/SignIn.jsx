@@ -40,7 +40,7 @@ export const SignIn = () => {
         if(name && email && password.length >=8){
           setvalidPass(true)
           setloading(false)
-          await axios.post('https://task-manager-mern-stack-zaxt.onrender.com/signup' , { name , email , password })
+          await axios.post('http://localhost:5050/signup' , { name , email , password })
           .then(res=>{
           setloading(true)
           setSignInRes(res.data.msg);
@@ -101,7 +101,7 @@ export const SignIn = () => {
 
         </div>
           </div>
-            {validPass ?<p className='text-danger mt-3'>{SignInRes}</p> : <p className='text-danger mt-3'>Password is too Short,Mininum 8 letter..</p>}
+            { validPass ?<p className='text-danger mt-3'>{SignInRes}</p> : <p className='text-danger mt-3'>Password is too Short,Mininum 8 letter..</p> }
           <div className="page_btns d-flex justify-content-between">
             <input type='submit' className='btn btn-info' value="SignIn" />
             

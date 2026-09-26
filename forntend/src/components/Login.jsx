@@ -22,7 +22,7 @@ export const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     setloading(false)
-      await axios.post('https://task-manager-mern-stack-zaxt.onrender.com/login' , { email , password })
+      await axios.post('http://localhost:5050/login' , { email , password })
       .then(res =>{
         setloading(true)
         setloginRes(res.data.msg);
@@ -64,7 +64,6 @@ export const Login = () => {
             setpassword(e.target.value);
           }} />
           <div className='pass_eye'> 
-            
               <i className={passeye} onClick={()=>{
                 setpasschange(false)
                 if(passeye === "bi bi-eye fw-bold fs-4 text-dark"){
@@ -77,7 +76,6 @@ export const Login = () => {
                 
              }}>
              </i>
-
           </div>
           
           </div>
