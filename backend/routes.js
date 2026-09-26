@@ -3,76 +3,76 @@ const UserModel = require('./Models/Usermodel');
 const toDoModel = require('./Models/Todomodel');
 const bookModel = require('./Models/BookTicket');
 const Route = express.Router();
-Route.post('/signup',async (req,res)=>{
+Route.post('/signup', async (req, res) => {
     try {
-        const { name , email , password } = req.body;
+        const { name, email, password } = req.body;
 
-        const users = await UserModel.findOne({email});
-        if(users){
+        const users = await UserModel.findOne({ email });
+        if (users) {
             res.json({
-                msg : "your email already registered !!"
+                msg: "your email already registered !!"
             });
         }
-        if(!users){
+        if (!users) {
 
-            const userdata =  await UserModel.create({ name , email , password });
+            const userdata = await UserModel.create({ name, email, password });
 
             res.json({
-                msg : "Successfully SignIned"
+                msg: "Successfully SignIned"
             });
         }
     } catch (error) {
-        res.json({msg : "Error Found ",err:error}); 
+        res.json({ msg: "Error Found ", err: error });
     }
 })
 
-Route.post('/login',async (req,res)=>{
+Route.post('/login', async (req, res) => {
 
     try {
-    const { email , password } = req.body;
+        const { email, password } = req.body;
 
-    const users = await UserModel.findOne({email});
+        const users = await UserModel.findOne({ email });
 
-        if(users){
-            if(users.password == password){
+        if (users) {
+            if (users.password == password) {
                 res.status(200).json({
-                    msg : "Login Successfull"
+                    msg: "Login Successfull"
                 })
-            }else{
+            } else {
                 res.json({
-                    msg : "your password is not correct"
+                    msg: "your password is not correct"
                 })
             }
-        }else{
+        } else {
             res.json({
-                msg : "your email is not correct"
+                msg: "your email is not correct"
             })
         }
     } catch (error) {
         res.json({
-            msg : " Error Found at Login Page !!"
+            msg: " Error Found at Login Page !!"
         })
     }
 })
 
-Route.post('/todolist',async (req,res)=>{
+Route.post('/todolist', async (req, res) => {
     try {
-        const { title , description , localEmail , dated } = req.body;
-        
-        const todo_title = await toDoModel.create({ title , description , email : localEmail , date : dated });
-        if(todo_title){
+        const { title, description, localEmail, dated } = req.body;
+
+        const todo_title = await toDoModel.create({ title, description, email: localEmail, date: dated });
+        if (todo_title) {
             res.json({
-                msg : 'Successfully Added !!'
+                msg: 'Successfully Added !!'
             })
         }
     } catch (error) {
         res.json({
-            msg : error
+            msg: error
         })
     }
 })
 
-Route.get('/todolist', async (req,res)=>{
+Route.get('/todolist', async (req, res) => {
     try {
         const { email } = req.query;
         const todos = await toDoModel.find({ email });
@@ -87,62 +87,62 @@ Route.get('/todolist', async (req,res)=>{
     }
 })
 
-Route.delete('/todolist/:id', async (req,res)=>{
+Route.delete('/todolist/:id', async (req, res) => {
     try {
         const { id } = req.params
         const deleted = await toDoModel.findByIdAndDelete(id);
-        if(deleted){
+        if (deleted) {
             res.json({
-                msg : deleted
+                msg: deleted
             })
         }
     } catch (error) {
         res.json({
-            msg : error
+            msg: error
         })
     }
-    
-    
+
+
 })
 
-Route.put('/todolist/:id', async (req,res)=>{
+Route.put('/todolist/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
-        const { Edittitle , Editdescription } = req.body;
+        const { Edittitle, Editdescription } = req.body;
 
-        const updated = await toDoModel.findOneAndUpdate({_id : id} ,{ title : Edittitle , description :  Editdescription});
+        const updated = await toDoModel.findOneAndUpdate({ _id: id }, { title: Edittitle, description: Editdescription });
 
         res.json({
-            msg : updated
-        })  
+            msg: updated
+        })
     } catch (error) {
         res.json({
-            msg : error
+            msg: error
         })
     }
-    
+
 })
 
-Route.post('/bookticket', async(req,res)=>{
+Route.post('/bookticket', async (req, res) => {
     try {
-        const { name , trainName , email , amount , trainNo  } = req.body;
-        
-        const TicketDetail = await bookModel.create({ name , trainName , email , amount , trainNo });
+        const { name, trainName, email, amount, trainNo } = req.body;
 
-        if(TicketDetail){
+        const TicketDetail = await bookModel.create({ name, trainName, email, amount, trainNo });
+
+        if (TicketDetail) {
             res.json({
-                msg : 'Successfully Added !!'
+                msg: 'Successfully Added !!'
             })
         }
     } catch (error) {
         res.json({
-            msg : error
+            msg: error
         })
     }
 })
 
-Route.get('/bookticket', async(req,res)=>{
+Route.get('/bookticket', async (req, res) => {
     try {
         const { email } = req.query;
         const ticket = await bookModel.find({ email });
