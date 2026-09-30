@@ -40,7 +40,7 @@ export const SignIn = () => {
         if(name && email && password.length >=8){
           setvalidPass(true)
           setloading(false)
-          await axios.post('http://localhost:5050/signup' , { name , email , password })
+          await axios.post('https://api-mernstack.onrender.com/signup' , { name , email , password })
           .then(res=>{
           setloading(true)
           setSignInRes(res.data.msg);
