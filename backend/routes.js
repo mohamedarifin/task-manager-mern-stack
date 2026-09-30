@@ -3,6 +3,7 @@ const UserModel = require('./Models/Usermodel');
 const toDoModel = require('./Models/Todomodel');
 const bookModel = require('./Models/BookTicket');
 const Route = express.Router();
+
 Route.post('/signup', async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -72,43 +73,20 @@ Route.post('/todolist', async (req, res) => {
     }
 })
 
-// Route.get('/todolist', async (req, res) => {
-//     try {
-//         const { email } = req.query;
-//         const todos = await toDoModel.find({ email });
-
-//         res.json({
-//             todos
-//         })
-//     } catch (error) {
-//         res.json({
-//             err
-//         })
-//     }
-// })
-
 Route.get('/todolist', async (req, res) => {
     try {
-        console.log("TODOLIST REQUEST:", req.query.email);
-
         const { email } = req.query;
-
         const todos = await toDoModel.find({ email });
-
-        console.log("TODOLIST RESULT:", todos);
 
         res.json({
             todos
-        });
-
+        })
     } catch (error) {
-        console.error("TODOLIST ERROR:", error);
-
-        res.status(500).json({
-            error: error.message
-        });
+        res.json({
+            err
+        })
     }
-});
+})
 
 Route.delete('/todolist/:id', async (req, res) => {
     try {
